@@ -35,3 +35,9 @@ echoc "setup ABI"
 APP_ABI=$(cat "$COMPILE_DIR/$APP_NAME.abi.json" | xxd -ps -c 20000)
 tonos-cli --url $NETWORK call "$APP_ADDR" setABI "{\"dabi\":\"$APP_ABI\"}" --sign "$DEPLOY_DIR/$APP_NAME.keys.json" --abi "$COMPILE_DIR/$APP_NAME.abi.json"
 echoc "Done."
+
+SERVICE_DISCOVERY_ADDR=0:9496eab9b056657cde50ea5fd2052845d439272ee67db0b1472bb7601720bfb7
+echoc "setup Service Discovery Address"
+# shellcheck disable=SC2002
+tonos-cli --url $NETWORK call "$APP_ADDR" setAddress  "{\"_addr\":\"$SERVICE_DISCOVERY_ADDR\"}" --sign "$DEPLOY_DIR/$APP_NAME.keys.json" --abi "$COMPILE_DIR/$APP_NAME.abi.json"
+echoc "Done."
